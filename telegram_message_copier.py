@@ -186,8 +186,8 @@ async def main():
             await asyncio.sleep(config['check_interval'])
     except asyncio.CancelledError:
         logging.info("Основной цикл прерван.")
-    except Exception as e:
-        logging.error(f"Неожиданная ошибка в основном цикле: {e}")
+    finally:
+        await send_end_message()  # Отправка смайлика при завершении работы
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
