@@ -13,11 +13,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Restore last message
-      uses: actions/download-artifact@v2
-      with:
-        name: last_message
-        path: last_message.txt
+    - name: Try to restore last message
+      run: |
+        if [ -f last_message.txt ]; then
+          echo "Restoring last message"
+          uses: actions/download-artifact@v2
+          with:
+            name: last_message
+            path: last_message.txt
+        else
+          echo "No last_message.txt to restore"
+        fi
 
     - name: Set up Python
       uses: actions/setup-python@v3
