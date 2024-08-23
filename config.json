@@ -1,0 +1,9 @@
+{
+    "chrome_driver_path": "C:\\Users\\Данила\\Desktop\\GPT\\2\\chrome driver\\chromedriver.exe",
+    "telegram_bot_token": "7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ",
+    "channel_id": "@ImperialSochiRS",
+    "source_channel_url": "https://t.me/s/developer_sochi",
+    "phone_replacement": "+79170467895",
+    "name_replacement": "Координатор Наталия",
+    "name_pattern": "Артур|Евгений|Иван|Александр|ДругиеИмена"
+}
