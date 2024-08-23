@@ -2,8 +2,8 @@ name: Run Script
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # Запуск скрипта каждые 15 минут
-  workflow_dispatch: # Возможность запуска вручную через интерфейс GitHub
+    - cron: '0 * * * *' # Запуск скрипта каждый час
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,6 +12,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Restore last message
+      uses: actions/download-artifact@v2
+      with:
+        name: last_message
+        path: last_message.txt
 
     - name: Set up Python
       uses: actions/setup-python@v3
@@ -35,3 +41,9 @@ jobs:
 
     - name: Run script
       run: python telegram_message_copier.py
+
+    - name: Save last message
+      uses: actions/upload-artifact@v2
+      with:
+        name: last_message
+        path: last_message.txt
