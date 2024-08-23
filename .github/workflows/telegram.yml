@@ -13,18 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Try to restore last message
-      run: |
-        if [ -f last_message.txt ]; then
-          echo "Restoring last message"
-          uses: actions/download-artifact@v2
-          with:
-            name: last_message
-            path: last_message.txt
-        else
-          echo "No last_message.txt to restore"
-        fi
-
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -49,13 +37,19 @@ jobs:
       run: python telegram_message_copier.py
 
     - name: Save logs
+      if: always()  # Артефакты сохраняются всегда, даже если произошла ошибка
       uses: actions/upload-artifact@v2
       with:
         name: script-log
         path: script.log
 
     - name: Save last message
+      if: always()  # Артефакт сохраняется всегда, даже если произошла ошибка
       uses: actions/upload-artifact@v2
       with:
         name: last_message
         path: last_message.txt
+
+    - name: Send completion emoji
+      if: always()  # Этот шаг выполняется всегда, даже если произошла ошибка
+      run: python -c "import requests; requests.post('https://api.telegram.org/bot<your_bot_token>/sendMessage', data={'chat_id': '<your_chat_id>', 'text': '👋'})"
