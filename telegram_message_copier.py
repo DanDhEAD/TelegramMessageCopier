@@ -27,19 +27,10 @@ config = {
     "max_retries": 3,  # Количество попыток повторной отправки
     "timeout": 60,  # Время ожидания для запросов (в секундах)
     "check_interval": 60,  # Интервал между проверками новых сообщений (в секундах)
-    "last_message_file": "last_message.txt",  # Файл для хранения последнего сообщения
-    "log_file": "script.log",  # Файл для логов
+    "last_message_file": "last_message.txt"  # Файл для хранения последнего сообщения
 }
 
-# Настройка логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(config["log_file"], mode='w', encoding='utf-8'),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
+logging.basicConfig(level=logging.INFO)
 
 # Настройка WebDriver
 options = Options()
@@ -75,7 +66,6 @@ async def shutdown(loop):
         if tasks:
             await asyncio.gather(*tasks, return_exceptions=True)
         logging.info("Все задачи завершены.")
-        await asyncio.sleep(5)  # Задержка перед завершением работы
         loop.stop()
         logging.info("Цикл событий остановлен.")
 
@@ -111,10 +101,10 @@ def get_latest_message():
     body.send_keys(Keys.PAGE_DOWN)
     time.sleep(2)
 
-    try:
-        message_block = driver.find_elements(By.CSS_SELECTOR, ".tgme_widget_message_wrap")[-1]  # Последнее сообщение
-        logging.info(f"Найдено последнее сообщение.")
+    message_block = driver.find_elements(By.CSS_SELECTOR, ".tgme_widget_message_wrap")[-1]  # Последнее сообщение
+    logging.info(f"Найдено последнее сообщение.")
 
+    try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
         text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{2}[\s\-\.]?\d{2}\b", config["phone_replacement"], text)
         text = re.sub(config["name_pattern"], config["name_replacement"], text)
@@ -140,6 +130,9 @@ def get_latest_message():
         logging.info(f"Сообщение: {text}")
         if media_url:
             logging.info(f"Медиа URL: {media_url}")
+        
+        # Сразу сохраняем последнее сообщение в файл
+        write_last_message(text)
         
         return text, media_url, media_type
 
@@ -172,7 +165,6 @@ async def send_message_to_channel(message, media_url, media_type):
             else:
                 await bot.send_message(chat_id=config['channel_id'], text=message)
             logging.info(f"Сообщение отправлено: {message}")
-            write_last_message(message)  # Сохранение последнего отправленного сообщения
             break  # Если отправка прошла успешно, выйти из цикла повторной отправки
         except Exception as e:
             retries += 1
@@ -182,10 +174,10 @@ async def send_message_to_channel(message, media_url, media_type):
 
 # Основная функция
 async def main():
-    try:
-        await send_start_message()
-        last_sent_message = read_last_message()
+    await send_start_message()
+    last_sent_message = read_last_message()
 
+    try:
         while True:
             latest_message, latest_media_url, latest_media_type = get_latest_message()
             
@@ -194,17 +186,10 @@ async def main():
                 last_sent_message = latest_message
 
             await asyncio.sleep(config['check_interval'])
-
     except asyncio.CancelledError:
         logging.info("Основной цикл прерван.")
-        await send_end_message()  # Попытка отправки смайлика при завершении
-
     except Exception as e:
         logging.error(f"Неожиданная ошибка в основном цикле: {e}")
-
-    finally:
-        logging.info("Корректное завершение работы.")
-        await shutdown(asyncio.get_event_loop())  # Попытка корректного завершения
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
