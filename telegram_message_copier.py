@@ -27,10 +27,19 @@ config = {
     "max_retries": 3,  # Количество попыток повторной отправки
     "timeout": 60,  # Время ожидания для запросов (в секундах)
     "check_interval": 60,  # Интервал между проверками новых сообщений (в секундах)
-    "last_message_file": "last_message.txt"  # Файл для хранения последнего сообщения
+    "last_message_file": "last_message.txt",  # Файл для хранения последнего сообщения
+    "log_file": "script.log",  # Файл для логов
 }
 
-logging.basicConfig(level=logging.INFO)
+# Настройка логирования
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(config["log_file"], mode='w', encoding='utf-8'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 
 # Настройка WebDriver
 options = Options()
@@ -66,6 +75,8 @@ async def shutdown(loop):
         if tasks:
             await asyncio.gather(*tasks, return_exceptions=True)
         logging.info("Все задачи завершены.")
+        # Задержка для гарантированного завершения
+        await asyncio.sleep(5)
         loop.stop()
         logging.info("Цикл событий остановлен.")
 
@@ -141,7 +152,7 @@ def get_latest_message():
 async def download_video(url):
     async with httpx.AsyncClient(timeout=config['timeout']) as client:
         response = await client.get(url)
-        with open(config['temp_video_file'], 'wb') as video_file:
+        with open(config['temp_video_file'], 'wb') as video_file):
             video_file.write(response.content)
         logging.info(f"Видео загружено: {config['temp_video_file']}")
 
@@ -188,6 +199,7 @@ async def main():
         logging.info("Основной цикл прерван.")
     finally:
         await send_end_message()  # Отправка смайлика при завершении работы
+        await asyncio.sleep(5)  # Задержка перед завершением для гарантированного выполнения
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
