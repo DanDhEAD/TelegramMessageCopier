@@ -37,15 +37,15 @@ jobs:
       run: python telegram_message_copier.py
 
     - name: Save logs
-      if: always()  # Артефакты сохраняются всегда, даже если произошла ошибка
       uses: actions/upload-artifact@v2
+      if: always()  # Артефакты сохраняются всегда, даже если произошла ошибка
       with:
         name: script-log
         path: script.log
 
     - name: Save last message
-      if: always()  # Артефакт сохраняется всегда, даже если произошла ошибка
       uses: actions/upload-artifact@v2
+      if: always()  # Артефакт сохраняется всегда, даже если произошла ошибка
       with:
         name: last_message
         path: last_message.txt
