@@ -152,7 +152,7 @@ def get_latest_message():
 async def download_video(url):
     async with httpx.AsyncClient(timeout=config['timeout']) as client:
         response = await client.get(url)
-        with open(config['temp_video_file'], 'wb') as video_file):
+        with open(config['temp_video_file'], 'wb') as video_file:
             video_file.write(response.content)
         logging.info(f"Видео загружено: {config['temp_video_file']}")
 
