@@ -48,6 +48,12 @@ jobs:
     - name: Run script
       run: python telegram_message_copier.py
 
+    - name: Save logs
+      uses: actions/upload-artifact@v2
+      with:
+        name: script-log
+        path: script.log
+
     - name: Save last message
       uses: actions/upload-artifact@v2
       with:
