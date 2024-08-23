@@ -17,10 +17,7 @@ jobs:
       run: |
         if [ -f last_message.txt ]; then
           echo "Restoring last message"
-          uses: actions/download-artifact@v2
-          with:
-            name: last_message
-            path: last_message.txt
+          cp last_message.txt last_message_backup.txt
         else
           echo "No last_message.txt to restore"
         fi
@@ -59,3 +56,7 @@ jobs:
       with:
         name: last_message
         path: last_message.txt
+
+    - name: Send completion emoji
+      if: always()  # Эта строка гарантирует, что шаг выполнится при любом исходе
+      run: python -c "import requests; requests.post('https://api.telegram.org/bot<your_bot_token>/sendMessage', data={'chat_id': '<your_chat_id>', 'text': '👋'})"
