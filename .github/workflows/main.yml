@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Обновлено до v3
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v3  # Обновлено до v3
+      uses: actions/setup-python@v3
       with:
         python-version: '3.x'
 
@@ -31,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests selenium python-telegram-bot
+        pip install requests selenium python-telegram-bot httpx webdriver_manager
 
     - name: Run script
       run: python telegram_message_copier.py
