@@ -75,8 +75,7 @@ async def shutdown(loop):
         if tasks:
             await asyncio.gather(*tasks, return_exceptions=True)
         logging.info("Все задачи завершены.")
-        # Задержка для гарантированного завершения
-        await asyncio.sleep(5)
+        await asyncio.sleep(5)  # Задержка перед завершением работы
         loop.stop()
         logging.info("Цикл событий остановлен.")
 
@@ -112,10 +111,10 @@ def get_latest_message():
     body.send_keys(Keys.PAGE_DOWN)
     time.sleep(2)
 
-    message_block = driver.find_elements(By.CSS_SELECTOR, ".tgme_widget_message_wrap")[-1]  # Последнее сообщение
-    logging.info(f"Найдено последнее сообщение.")
-
     try:
+        message_block = driver.find_elements(By.CSS_SELECTOR, ".tgme_widget_message_wrap")[-1]  # Последнее сообщение
+        logging.info(f"Найдено последнее сообщение.")
+
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
         text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{2}[\s\-\.]?\d{2}\b", config["phone_replacement"], text)
         text = re.sub(config["name_pattern"], config["name_replacement"], text)
@@ -183,10 +182,10 @@ async def send_message_to_channel(message, media_url, media_type):
 
 # Основная функция
 async def main():
-    await send_start_message()
-    last_sent_message = read_last_message()
-
     try:
+        await send_start_message()
+        last_sent_message = read_last_message()
+
         while True:
             latest_message, latest_media_url, latest_media_type = get_latest_message()
             
@@ -195,11 +194,17 @@ async def main():
                 last_sent_message = latest_message
 
             await asyncio.sleep(config['check_interval'])
+
     except asyncio.CancelledError:
         logging.info("Основной цикл прерван.")
+        await send_end_message()  # Попытка отправки смайлика при завершении
+
+    except Exception as e:
+        logging.error(f"Неожиданная ошибка в основном цикле: {e}")
+
     finally:
-        await send_end_message()  # Отправка смайлика при завершении работы
-        await asyncio.sleep(5)  # Задержка перед завершением для гарантированного выполнения
+        logging.info("Корректное завершение работы.")
+        await shutdown(asyncio.get_event_loop())  # Попытка корректного завершения
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
