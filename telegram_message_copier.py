@@ -17,8 +17,8 @@ import sys
 # Настройки
 config = {
     "chrome_driver_path": "C:\\Users\\Данила\\Desktop\\GPT\\2\\chrome driver\\chromedriver.exe",
-    "telegram_bot_token": "7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ",
-    "channel_id": "@ImperialSochiRS",
+    "telegram_bot_token": "<your_bot_token>",  # Убедитесь, что заменили на ваш токен
+    "channel_id": "<your_chat_id>",  # Убедитесь, что заменили на ваш чат ID
     "source_channel_url": "https://t.me/s/developer_sochi",
     "phone_replacement": "+79170467895",
     "name_replacement": "Координатор Наталия",
@@ -30,7 +30,7 @@ config = {
     "last_message_file": "last_message.txt"  # Файл для хранения последнего сообщения
 }
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(filename="script.log", level=logging.INFO)
 
 # Настройка WebDriver
 options = Options()
@@ -128,11 +128,8 @@ def get_latest_message():
                 logging.warning(f"Не удалось найти медиа для сообщения: {e}")
 
         logging.info(f"Сообщение: {text}")
-        if media_url:
+        if (media_url):
             logging.info(f"Медиа URL: {media_url}")
-        
-        # Сразу сохраняем последнее сообщение в файл
-        write_last_message(text)
         
         return text, media_url, media_type
 
@@ -165,6 +162,7 @@ async def send_message_to_channel(message, media_url, media_type):
             else:
                 await bot.send_message(chat_id=config['channel_id'], text=message)
             logging.info(f"Сообщение отправлено: {message}")
+            write_last_message(message)  # Сохранение последнего отправленного сообщения
             break  # Если отправка прошла успешно, выйти из цикла повторной отправки
         except Exception as e:
             retries += 1
