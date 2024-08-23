@@ -37,14 +37,14 @@ jobs:
       run: python telegram_message_copier.py
 
     - name: Save logs
-      if: always()  # Этот шаг выполняется всегда, даже если произошла ошибка
+      if: always()  # Артефакты сохраняются всегда, даже если произошла ошибка
       uses: actions/upload-artifact@v2
       with:
         name: script-log
         path: script.log
 
     - name: Save last message
-      if: always()  # Этот шаг выполняется всегда, даже если произошла ошибка
+      if: always()  # Артефакт сохраняется всегда, даже если произошла ошибка
       uses: actions/upload-artifact@v2
       with:
         name: last_message
@@ -52,4 +52,5 @@ jobs:
 
     - name: Send completion emoji
       if: always()  # Этот шаг выполняется всегда, даже если произошла ошибка
-      run: python -c "import requests; requests.post('https://api.telegram.org/bot<your_bot_token>/sendMessage', data={'chat_id': '<your_chat_id>', 'text': '👋'})"
+      run: |
+        python -c "import requests; requests.post('https://api.telegram.org/bot<your_bot_token>/sendMessage', data={'chat_id': '<your_chat_id>', 'text': '👋'})"
