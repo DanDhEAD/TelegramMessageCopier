@@ -1,10 +1,12 @@
 import asyncio
 import logging
-import time
-import re
-import os
+import signal
 import json
 import httpx
+import os
+import re
+import time
+from contextlib import asynccontextmanager
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -12,7 +14,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from telegram import Bot
-import signal
 
 # Загрузка конфигурации из файла config.json
 with open("config.json", "r", encoding="utf-8") as config_file:
@@ -50,6 +51,25 @@ async def send_end_message():
     await bot.send_message(chat_id=config['channel_id'], text="👋")
     logging.info("Отправлена контрольная фраза при завершении работы: 👋")
 
+@asynccontextmanager
+async def graceful_shutdown():
+    loop = asyncio.get_event_loop()
+
+    def _cancel_tasks():
+        logging.info("Получен сигнал отмены. Завершаем задачи...")
+        for task in asyncio.all_tasks(loop):
+            task.cancel()
+
+    try:
+        signal.signal(signal.SIGINT, lambda sig, frame: _cancel_tasks())
+        signal.signal(signal.SIGTERM, lambda sig, frame: _cancel_tasks())
+        yield
+    except asyncio.CancelledError:
+        logging.info("Задачи отменены.")
+    finally:
+        await send_end_message()
+        logging.info("Завершение работы завершено.")
+
 # Функция завершения работы
 async def shutdown(loop):
     logging.info("Начало процесса завершения работы...")
@@ -66,15 +86,6 @@ async def shutdown(loop):
         logging.info("Все задачи завершены.")
         loop.stop()
         logging.info("Цикл событий остановлен.")
-
-# Обработка сигналов завершения работы (например, Ctrl+C)
-def signal_handler(sig, frame):
-    loop = asyncio.get_event_loop()
-    logging.info(f"Получен сигнал {sig}. Немедленное завершение.")
-    asyncio.ensure_future(shutdown(loop))
-
-signal.signal(signal.SIGINT, signal_handler)
-signal.signal(signal.SIGTERM, signal_handler)
 
 # Функция для чтения последнего отправленного сообщения из файла
 def read_last_message():
@@ -104,7 +115,7 @@ def get_latest_message():
 
     try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
-        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\д{3}\)?[\с\-\.]?\д{3}[\с\-\.]?\д{2}[\с\-\.]?\д{2}\b", config["phone_replacement"], text)
+        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\с\-\.]?\д{3}[\с\-\.]?\д{2}[\с\-\.]?\д{2}\b", config["phone_replacement"], text)
         text = re.sub(name_pattern, config["name_replacement"], text)
         
         media_url = None
@@ -139,7 +150,7 @@ def get_latest_message():
 async def download_video(url):
     async with httpx.AsyncClient(timeout=config['timeout']) as client:
         response = await client.get(url)
-        with open(config['temp_video_file'], 'wb') as video_file:  # Здесь оставляем обычный синхронный with для работы с файлом
+        with open(config['temp_video_file'], 'wb') as video_file:
             video_file.write(response.content)
         logging.info(f"Видео загружено: {config['temp_video_file']}")
 
@@ -160,28 +171,26 @@ async def send_message_to_channel(message, media_url, media_type):
             else:
                 await bot.send_message(chat_id=config['channel_id'], text=message)
             logging.info(f"Сообщение отправлено: {message}")
-            write_last_message(message)  # Сохранение последнего отправленного сообщения
-            break  # Если отправка прошла успешно, выйти из цикла повторной отправки
+            write_last_message(message)
+            break
         except Exception as e:
             retries += 1
             logging.error(f"Ошибка при отправке сообщения, попытка {retries}: {e}")
             if retries >= config["max_retries"]:
                 logging.error(f"Все попытки отправки сообщения не удались")
 
-# Основная функция
 async def main():
     await send_start_message()
     last_sent_message = read_last_message()
 
     try:
-        while True:
-            latest_message, latest_media_url, latest_media_type = get_latest_message()
-            
-            if latest_message and latest_message != last_sent_message:
-                await send_message_to_channel(latest_message, latest_media_url, latest_media_type)
-                last_sent_message = latest_message
-
-            await asyncio.sleep(config['check_interval'])
+        async with graceful_shutdown():
+            while True:
+                latest_message, latest_media_url, latest_media_type = get_latest_message()
+                if latest_message and latest_message != last_sent_message:
+                    await send_message_to_channel(latest_message, latest_media_url, latest_media_type)
+                    last_sent_message = latest_message
+                await asyncio.sleep(config['check_interval'])
     except asyncio.CancelledError:
         logging.info("Основной цикл прерван.")
     except Exception as e:
