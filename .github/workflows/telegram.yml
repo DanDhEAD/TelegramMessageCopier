@@ -2,8 +2,7 @@ name: Copy Telegram Messages
 
 on:
   schedule:
-    - cron: "*/10 8-22 * * *"  # Один раз через 10 минут после первоначального успешного запуска
-    - cron: "*/30 8-22 * * *"  # Последующие запуски каждые 30 минут с 8:00 до 22:00 по МСК после первого успешного запуска
+    - cron: "*/30 8-22 * * *"  # Запуск каждые 30 минут с 8:00 до 22:00
   workflow_dispatch:
 
 jobs:
@@ -21,6 +20,11 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
+
+    - name: Timeout after 25 minutes
+      uses: actions/timeout@v1
+      with:
+        minutes: 25
 
     - name: Run the script
       run: python telegram_message_copier.py

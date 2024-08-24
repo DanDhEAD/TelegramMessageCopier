@@ -1,9 +1,10 @@
+import os
+import sys
 import asyncio
 import logging
 import signal
 import json
 import httpx
-import os
 import re
 import time
 from contextlib import asynccontextmanager
@@ -14,6 +15,17 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from telegram import Bot
+
+# Проверка на существующий файл-замок
+lock_file = "script.lock"
+
+if os.path.exists(lock_file):
+    print("Another instance of the script is already running. Exiting.")
+    sys.exit()
+
+# Создание файла-замка
+with open(lock_file, 'w') as lock:
+    lock.write(str(os.getpid()))
 
 # Загрузка конфигурации из файла config.json
 with open("config.json", "r", encoding="utf-8") as config_file:
@@ -70,6 +82,12 @@ async def graceful_shutdown():
         await send_end_message()
         logging.info("Завершение работы завершено.")
         await asyncio.sleep(2)  # Задержка для отправки смайлика перед завершением
+
+# Время начала выполнения скрипта
+start_time = time.time()
+
+# Максимальное время работы скрипта в секундах (5 минут)
+max_run_time = 5 * 60
 
 # Функция завершения работы
 async def shutdown(loop):
@@ -192,6 +210,11 @@ async def main():
     try:
         async with graceful_shutdown():
             while True:
+                # Проверяем, прошло ли максимальное время работы скрипта
+                if time.time() - start_time > max_run_time:
+                    logging.info("Превышено максимальное время выполнения. Завершаем работу.")
+                    break
+
                 latest_message, latest_media_url, latest_media_type = get_latest_message()
                 if latest_message and latest_message != last_sent_message:
                     await send_message_to_channel(latest_message, latest_media_url, latest_media_type)
@@ -201,6 +224,9 @@ async def main():
         logging.info("Основной цикл прерван.")
     except Exception as e:
         logging.error(f"Неожиданная ошибка в основном цикле: {e}")
+    finally:
+        # Удаление файла-замка при завершении
+        os.remove(lock_file)
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
