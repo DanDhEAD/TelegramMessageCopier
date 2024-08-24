@@ -17,8 +17,8 @@ import sys
 # Настройки
 config = {
     "chrome_driver_path": "C:\\Users\\Данила\\Desktop\\GPT\\2\\chrome driver\\chromedriver.exe",
-    "telegram_bot_token": "7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ",  # Замените на ваш токен
-    "channel_id": "@ImperialSochiRS",  # Замените на ваш чат ID
+    "telegram_bot_token": "7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ",
+    "channel_id": "@ImperialSochiRS",
     "source_channel_url": "https://t.me/s/developer_sochi",
     "phone_replacement": "+79170467895",
     "name_replacement": "Координатор Наталия",
@@ -30,7 +30,7 @@ config = {
     "last_message_file": "last_message.txt"  # Файл для хранения последнего сообщения
 }
 
-logging.basicConfig(filename="script.log", level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 # Настройка WebDriver
 options = Options()
@@ -106,7 +106,7 @@ def get_latest_message():
 
     try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
-        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\д{2}[\s\-\.]?\д{2}\b", config["phone_replacement"], text)
+        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{2}[\s\-\.]?\d{2}\b", config["phone_replacement"], text)
         text = re.sub(config["name_pattern"], config["name_replacement"], text)
         
         media_url = None
