@@ -3,6 +3,7 @@ import logging
 import time
 import re
 import os
+import json  # Для работы с JSON
 import httpx
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -21,15 +22,25 @@ config = {
     "source_channel_url": "https://t.me/s/developer_sochi",
     "phone_replacement": "+79170467895",
     "name_replacement": "Координатор Наталия",
-    "name_pattern": "Артур|Евгений|Иван|Александр|ДругиеИмена",
     "temp_video_file": "temp_video.mp4",  # Временный файл для загрузки видео
     "max_retries": 3,  # Количество попыток повторной отправки
     "timeout": 60,  # Время ожидания для запросов (в секундах)
     "check_interval": 60,  # Интервал между проверками новых сообщений (в секундах)
-    "last_message_file": "last_message.txt"  # Файл для хранения последнего сообщения
+    "last_message_file": "last_message.txt",  # Файл для хранения последнего сообщения
+    "names_dictionary_file": "names_dictionary.json"  # Имя файла со словарем имен
 }
 
 logging.basicConfig(level=logging.INFO)
+
+# Функция загрузки имен из JSON-файла
+def load_names_from_json(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        return data.get("names", [])
+
+# Загружаем имена из словаря
+names_list = load_names_from_json(config["names_dictionary_file"])
+name_pattern = "|".join(names_list)  # Создаем регулярное выражение для поиска имен
 
 # Настройка WebDriver
 options = Options()
@@ -106,7 +117,7 @@ def get_latest_message():
     try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
         text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{2}[\s\-\.]?\d{2}\b", config["phone_replacement"], text)
-        text = re.sub(config["name_pattern"], config["name_replacement"], text)
+        text = re.sub(name_pattern, config["name_replacement"], text)
         
         media_url = None
         media_type = None
