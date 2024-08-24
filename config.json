@@ -5,5 +5,10 @@
     "source_channel_url": "https://t.me/s/developer_sochi",
     "phone_replacement": "+79170467895",
     "name_replacement": "Координатор Наталия",
-    "name_pattern": "Артур|Евгений|Иван|Александр|ДругиеИмена"
+    "temp_video_file": "temp_video.mp4",
+    "max_retries": 3,
+    "timeout": 60,
+    "check_interval": 60,
+    "last_message_file": "last_message.txt",
+    "names_dictionary_file": "names_dictionary.json"
 }

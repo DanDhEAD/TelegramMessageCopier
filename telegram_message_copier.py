@@ -3,7 +3,7 @@ import logging
 import time
 import re
 import os
-import json  # Для работы с JSON
+import json
 import httpx
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -14,21 +14,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from telegram import Bot
 import signal
 
-# Настройки
-config = {
-    "chrome_driver_path": "C:\\Users\\Данила\\Desktop\\GPT\\2\\chrome driver\\chromedriver.exe",
-    "telegram_bot_token": "7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ",
-    "channel_id": "@ImperialSochiRS",
-    "source_channel_url": "https://t.me/s/developer_sochi",
-    "phone_replacement": "+79170467895",
-    "name_replacement": "Координатор Наталия",
-    "temp_video_file": "temp_video.mp4",  # Временный файл для загрузки видео
-    "max_retries": 3,  # Количество попыток повторной отправки
-    "timeout": 60,  # Время ожидания для запросов (в секундах)
-    "check_interval": 60,  # Интервал между проверками новых сообщений (в секундах)
-    "last_message_file": "last_message.txt",  # Файл для хранения последнего сообщения
-    "names_dictionary_file": "names_dictionary.json"  # Имя файла со словарем имен
-}
+# Загрузка конфигурации из файла config.json
+with open("config.json", "r", encoding="utf-8") as config_file:
+    config = json.load(config_file)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -116,7 +104,7 @@ def get_latest_message():
 
     try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
-        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{2}[\s\-\.]?\d{2}\b", config["phone_replacement"], text)
+        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\д{3}\)?[\с\-\.]?\д{3}[\с\-\.]?\д{2}[\с\-\.]?\д{2}\b", config["phone_replacement"], text)
         text = re.sub(name_pattern, config["name_replacement"], text)
         
         media_url = None
