@@ -1,56 +1,49 @@
-name: Run Script
+name: Telegram Message Copier
 
 on:
   schedule:
-    - cron: '0 * * * *' # Запуск скрипта каждый час
-  workflow_dispatch:
+    - cron: '0 5-19 * * *'  # Запуск каждый час с 8:00 до 22:00 по Москве (UTC+3)
+  workflow_dispatch:  # Возможность ручного запуска
 
 jobs:
-  build:
+  copy_messages:
     runs-on: ubuntu-latest
+    timeout-minutes: 360  # Максимальное время выполнения workflow 6 часов
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Restore last message
-      if: steps.restore.outputs.found == 'true'
-      uses: actions/download-artifact@v2
-      with:
-        name: last_message
-        path: last_message.txt
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
-
-    - name: Install Chrome Driver
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
-        wget -N https://chromedriver.storage.googleapis.com/$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip -P ~/
-        unzip ~/chromedriver_linux64.zip -d ~/
-        sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-        sudo chown root:root /usr/local/bin/chromedriver
-        sudo chmod 0755 /usr/local/bin/chromedriver
+        python-version: 3.x
 
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests selenium python-telegram-bot httpx webdriver_manager
+      run: pip install -r requirements.txt
 
-    - name: Run script
-      run: python telegram_message_copier.py
-
-    - name: Save logs
-      uses: actions/upload-artifact@v2
+    - name: Timeout after 24 minutes
+      uses: actions/timeout@v1
       with:
-        name: script-log
-        path: script.log
+        minutes: 24
 
-    - name: Save last message
+    - name: Run telegram message copier
+      run: |
+        python telegram_message_copier.py
+
+    - name: Save last_message artifact
+      if: success()  # Сохраняем артефакт только если скрипт успешно завершился
       uses: actions/upload-artifact@v2
       with:
         name: last_message
         path: last_message.txt
+
+    - name: Send completion emoji
+      if: always()  # Выполнить в любом случае (успех или неудача)
+      run: |
+        python -c "
+from telegram import Bot
+
+bot = Bot(token='7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ')
+bot.send_message(chat_id='@ImperialSochiRS', text='👋 Workflow завершен!')
+        "

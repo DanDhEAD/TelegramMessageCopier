@@ -13,6 +13,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from telegram import Bot
 import signal
 import sys
+from contextlib import contextmanager
 
 # Настройки
 config = {
@@ -30,15 +31,21 @@ config = {
     "last_message_file": "last_message.txt"  # Файл для хранения последнего сообщения
 }
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Настройка WebDriver
 options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 
+logging.info("Инициализация WebDriver...")
 service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options)
+try:
+    driver = webdriver.Chrome(service=service, options=options)
+    logging.info("WebDriver успешно инициализирован.")
+except Exception as e:
+    logging.error(f"Ошибка при инициализации WebDriver: {e}")
+    sys.exit(1)
 
 # Функция для отправки контрольной фразы при старте
 async def send_start_message():
@@ -46,37 +53,24 @@ async def send_start_message():
     await bot.send_message(chat_id=config['channel_id'], text="IMPERIAL RS")
     logging.info("Отправлена контрольная фраза: IMPERIAL RS")
 
-# Функция для отправки контрольной фразы при завершении
-async def send_end_message():
-    bot = Bot(token=config['telegram_bot_token'])
-    await bot.send_message(chat_id=config['channel_id'], text="👋")
-    logging.info("Отправлена контрольная фраза при завершении работы: 👋")
-
 # Функция завершения работы
 async def shutdown(loop):
     logging.info("Начало процесса завершения работы...")
     try:
-        await send_end_message()
+        pass  # Смайлик теперь отправляется через YAML файл, здесь ничего делать не нужно
     except Exception as e:
-        logging.error(f"Ошибка при отправке контрольного сообщения: {e}")
+        logging.error(f"Ошибка при завершении работы: {e}")
     finally:
-        driver.quit()
-        logging.info("WebDriver закрыт.")
-        tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
-        if tasks:
-            await asyncio.gather(*tasks, return_exceptions=True)
-        logging.info("Все задачи завершены.")
-        loop.stop()
-        logging.info("Цикл событий остановлен.")
-
-# Обработка сигналов завершения работы (например, Ctrl+C)
-def signal_handler(sig, frame):
-    loop = asyncio.get_event_loop()
-    logging.info(f"Получен сигнал {sig}. Немедленное завершение.")
-    asyncio.ensure_future(shutdown(loop))
-
-signal.signal(signal.SIGINT, signal_handler)
-signal.signal(signal.SIGTERM, signal_handler)
+        try:
+            logging.info("Попытка закрыть WebDriver...")
+            driver.quit()
+            logging.info("WebDriver успешно закрыт.")
+        except Exception as e:
+            logging.error(f"Ошибка при закрытии WebDriver: {e}")
+        finally:
+            logging.info("Остановка цикла событий...")
+            loop.stop()
+            logging.info("Цикл событий успешно остановлен.")
 
 # Функция для чтения последнего отправленного сообщения из файла
 def read_last_message():
@@ -92,8 +86,8 @@ def write_last_message(message):
 
 # Функция для получения последнего сообщения
 def get_latest_message():
-    driver.get(config['source_channel_url'])
     logging.info("Открываем страницу канала.")
+    driver.get(config['source_channel_url'])
     time.sleep(10)  # Ожидание полной загрузки страницы
     logging.info("Ожидание полной загрузки страницы...")
 
@@ -137,42 +131,51 @@ def get_latest_message():
         logging.error(f"Ошибка при извлечении последнего сообщения: {e}")
         return None, None, None
 
-# Функция для загрузки видеофайла перед отправкой
-async def download_video(url):
+# Функция для загрузки медиафайла (видео или фото)
+async def download_media(url, file_path):
     async with httpx.AsyncClient(timeout=config['timeout']) as client:
         response = await client.get(url)
-        with open(config['temp_video_file'], 'wb') as video_file:
-            video_file.write(response.content)
-        logging.info(f"Видео загружено: {config['temp_video_file']}")
+        with open(file_path, 'wb') as media_file:
+            media_file.write(response.content)
+        logging.info(f"Медиафайл загружен: {file_path}")
 
-# Функция для отправки сообщения в Telegram канал с логикой повторной отправки
+@contextmanager
+def temporary_file(file_path):
+    try:
+        yield file_path
+    finally:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            logging.info(f"Временный файл {file_path} удален.")
+
+async def send_media_message(bot, media_url, media_type, caption):
+    if media_type == 'photo':
+        await bot.send_photo(chat_id=config['channel_id'], photo=media_url, caption=caption)
+    elif media_type == 'video':
+        async with temporary_file(config['temp_video_file']):
+            await download_media(media_url, config['temp_video_file'])
+            with open(config['temp_video_file'], 'rb') as video_file:
+                await bot.send_video(chat_id=config['channel_id'], video=video_file, caption=caption)
+    else:
+        await bot.send_message(chat_id=config['channel_id'], text=caption)
+
 async def send_message_to_channel(message, media_url, media_type):
     bot = Bot(token=config['telegram_bot_token'])
     
-    retries = 0
-    while retries < config["max_retries"]:
+    for attempt in range(config["max_retries"]):
         try:
-            if media_type == 'photo':
-                await bot.send_photo(chat_id=config['channel_id'], photo=media_url, caption=message)
-            elif media_type == 'video':
-                await download_video(media_url)
-                with open(config['temp_video_file'], 'rb') as video_file:
-                    await bot.send_video(chat_id=config['channel_id'], video=video_file, caption=message)
-                os.remove(config['temp_video_file'])
-            else:
-                await bot.send_message(chat_id=config['channel_id'], text=message)
-            logging.info(f"Сообщение отправлено: {message}")
+            await send_media_message(bot, media_url, media_type, message)
+            logging.info(f"Сообщение успешно отправлено: {message}")
             write_last_message(message)  # Сохранение последнего отправленного сообщения
             break  # Если отправка прошла успешно, выйти из цикла повторной отправки
         except Exception as e:
-            retries += 1
-            logging.error(f"Ошибка при отправке сообщения, попытка {retries}: {e}")
-            if retries >= config["max_retries"]:
+            logging.error(f"Ошибка при отправке сообщения, попытка {attempt + 1}: {e}")
+            if attempt + 1 >= config["max_retries"]:
                 logging.error(f"Все попытки отправки сообщения не удались")
 
 # Основная функция
 async def main():
-    await send_start_message()
+    await send_start_message()  # Отправляем начальную контрольную фразу
     last_sent_message = read_last_message()
 
     try:
@@ -189,17 +192,34 @@ async def main():
     except Exception as e:
         logging.error(f"Неожиданная ошибка в основном цикле: {e}")
 
-if __name__ == "__main__":
+async def main_with_shutdown():
     loop = asyncio.get_event_loop()
     try:
-        loop.run_until_complete(main())
-    except KeyboardInterrupt:
-        logging.info("Получено прерывание с клавиатуры.")
+        await main()
+    except (KeyboardInterrupt, asyncio.CancelledError):
+        logging.info("Получен сигнал завершения.")
     finally:
-        try:
-            loop.run_until_complete(shutdown(loop))
-        except RuntimeError:
-            logging.info("Цикл событий уже остановлен.")
-        finally:
-            loop.close()
-            logging.info("Скрипт успешно завершен.")
+        await shutdown(loop)
+
+# Функция для обработки сигналов
+def signal_handler(sig, frame):
+    loop = asyncio.get_event_loop()
+    logging.info(f"Получен сигнал {sig}. Начало процесса отмены задач и завершения работы.")
+    for task in asyncio.all_tasks(loop):
+        logging.info(f"Отмена задачи: {task}")
+        task.cancel()
+    loop.call_soon_threadsafe(loop.stop)
+    logging.info("Цикл событий будет остановлен.")
+
+if __name__ == "__main__":
+    logging.info("Установка обработчиков сигналов...")
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    try:
+        logging.info("Запуск основного цикла событий...")
+        asyncio.run(main_with_shutdown())
+    except Exception as e:
+        logging.error(f"Ошибка во время выполнения: {e}")
+    finally:
+        logging.info("Скрипт успешно завершен.")
