@@ -13,6 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Restore last message
+      if: steps.restore.outputs.found == 'true'
+      uses: actions/download-artifact@v2
+      with:
+        name: last_message
+        path: last_message.txt
+
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
