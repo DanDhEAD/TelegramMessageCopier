@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install python-telegram-bot  # Добавляем установку модуля
+        pip install python-telegram-bot  # Устанавливаем модуль перед использованием
 
     - name: Run telegram message copier
       run: |
@@ -38,4 +38,5 @@ jobs:
     - name: Send completion emoji
       if: always()  # Выполнить в любом случае (успех или неудача)
       run: |
+        pip install python-telegram-bot  # Убедимся, что модуль установлен перед отправкой сообщения
         python -c "from telegram import Bot; bot = Bot(token='7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ'); bot.send_message(chat_id='@ImperialSochiRS', text='👋 Workflow завершен!')"
