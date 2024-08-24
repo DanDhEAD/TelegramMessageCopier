@@ -69,6 +69,7 @@ async def graceful_shutdown():
     finally:
         await send_end_message()
         logging.info("Завершение работы завершено.")
+        await asyncio.sleep(2)  # Задержка для отправки смайлика перед завершением
 
 # Функция завершения работы
 async def shutdown(loop):
@@ -115,7 +116,12 @@ def get_latest_message():
 
     try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
-        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\с\-\.]?\д{3}[\с\-\.]?\д{2}[\с\-\.]?\д{2}\b", config["phone_replacement"], text)
+
+        # Замена номеров телефонов
+        for pattern in config["phone_patterns"]:
+            text = re.sub(pattern, config["phone_replacement"], text)
+
+        # Замена имен
         text = re.sub(name_pattern, config["name_replacement"], text)
         
         media_url = None
