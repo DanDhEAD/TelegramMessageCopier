@@ -8,6 +8,7 @@ on:
 jobs:
   copy_messages:
     runs-on: ubuntu-latest
+    timeout-minutes: 25  # Таймаут на выполнение задачи
 
     steps:
     - name: Checkout code
@@ -20,11 +21,6 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
-
-    - name: Timeout after 25 minutes
-      uses: actions/timeout@v1
-      with:
-        minutes: 25
 
     - name: Run the script
       run: python telegram_message_copier.py
