@@ -5,19 +5,11 @@
     "source_channel_url": "https://t.me/s/developer_sochi",
     "phone_replacement": "+79170467895",
     "name_replacement": "Координатор Наталия",
+    "names_dictionary_file": "names_dictionary.json",
+    "phone_patterns_file": "phone_patterns.json",
     "temp_video_file": "temp_video.mp4",
     "max_retries": 3,
     "timeout": 60,
     "check_interval": 60,
-    "last_message_file": "last_message.txt",
-    "names_dictionary_file": "names_dictionary.json",
-    "phone_patterns": [
-        "\\+7\\s\\d{3}\\s\\d{3}\\s\\d{2}\\s\\d{2}",
-        "\\+7\\s\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}",
-        "8\\s\\d{3}\\s\\d{3}\\s\\d{2}\\s\\d{2}",
-        "\\d{11}",
-        "\\+7-\\d{3}-\\d{3}-\\d{2}-\\d{2}",
-        "\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}",
-        "\\+7\\s\\(\\d{3}\\)\\s\\d{3}\\-\\d{2}\\-\\d{2}"
-    ]
+    "last_message_file": "last_message.txt"
 }

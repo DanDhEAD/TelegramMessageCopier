@@ -39,9 +39,18 @@ def load_names_from_json(filename):
         data = json.load(file)
         return data.get("names", [])
 
+# Функция загрузки шаблонов номеров телефонов из JSON-файла
+def load_phone_patterns_from_json(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        return data.get("phone_patterns", [])
+
 # Загружаем имена из словаря
 names_list = load_names_from_json(config["names_dictionary_file"])
-name_pattern = "|".join(names_list)  # Создаем регулярное выражение для поиска имен
+name_pattern = re.compile("|".join(names_list), re.IGNORECASE)  # Создаем регулярное выражение для поиска имен
+
+# Загружаем шаблоны номеров телефонов
+phone_patterns = load_phone_patterns_from_json(config["phone_patterns_file"])
 
 # Настройка WebDriver
 options = Options()
@@ -56,12 +65,6 @@ async def send_start_message():
     bot = Bot(token=config['telegram_bot_token'])
     await bot.send_message(chat_id=config['channel_id'], text="IMPERIAL RS")
     logging.info("Отправлена контрольная фраза: IMPERIAL RS")
-
-# Функция для отправки контрольной фразы при завершении
-async def send_end_message():
-    bot = Bot(token=config['telegram_bot_token'])
-    await bot.send_message(chat_id=config['channel_id'], text="👋")
-    logging.info("Отправлена контрольная фраза при завершении работы: 👋")
 
 @asynccontextmanager
 async def graceful_shutdown():
@@ -79,7 +82,6 @@ async def graceful_shutdown():
     except asyncio.CancelledError:
         logging.info("Задачи отменены.")
     finally:
-        await send_end_message()
         logging.info("Завершение работы завершено.")
         await asyncio.sleep(2)  # Задержка для отправки смайлика перед завершением
 
@@ -93,9 +95,9 @@ max_run_time = 5 * 60
 async def shutdown(loop):
     logging.info("Начало процесса завершения работы...")
     try:
-        await send_end_message()
+        pass  # Убираем отправку смайлика
     except Exception as e:
-        logging.error(f"Ошибка при отправке контрольного сообщения: {e}")
+        logging.error(f"Ошибка при завершении: {e}")
     finally:
         driver.quit()
         logging.info("WebDriver закрыт.")
@@ -136,11 +138,11 @@ def get_latest_message():
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
 
         # Замена номеров телефонов
-        for pattern in config["phone_patterns"]:
+        for pattern in phone_patterns:
             text = re.sub(pattern, config["phone_replacement"], text)
 
         # Замена имен
-        text = re.sub(name_pattern, config["name_replacement"], text)
+        text = name_pattern.sub(config["name_replacement"], text)
         
         media_url = None
         media_type = None
