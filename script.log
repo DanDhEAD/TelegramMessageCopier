@@ -1,0 +1,219 @@
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\Данила\.wdm\drivers\chromedriver\win64\128.0.6613.84\chromedriver-win32/chromedriver.exe] found in cache
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза: IMPERIAL RS
+INFO:root:Открываем страницу канала.
+INFO:root:Ожидание полной загрузки страницы...
+INFO:root:Найдено последнее сообщение.
+INFO:root:Обнаружено видео: https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA, Ширина: 100, Высота: 100
+INFO:root:Сообщение: Сочи
+\U0001f4cd Лоо (Горный воздух)
+Дешевле прайса на 1 млн
+Срочно
+И это не стройка с нуля. Это готовый дом, 2015 года.
+
+\u25aa\ufe0f Дом клубного типа 3 этажа
+\u25aa\ufe0f Обновление фасада и территории \U0001f468\U0001f3fd\u200d\U0001f527
+\u25aa\ufe0f Своя баня \U0001f9d6\u200d\u2640\ufe0f
+\u25aa\ufe0f 10 минут до моря \U0001f30a и жд \U0001f689станции Горный воздух.
+\u25aa\ufe0f 20 км до Сочи
+\u25aa\ufe0f Земля в собственности
+
+Озеленение, баня со своим спуском к небольшому руслу реки .
+
+Объект располагается на равнине, в 10 минутах пешей доступности от моря, где один из самых лучших пляжей и достойная инфраструктура.
+S-23 м
+2- эт
+Цена \U0001f5252.0 млн\U0001f525
+Только наличка
+
+89180006062
+Координатор Наталия
+INFO:root:Медиа URL: https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA
+INFO:httpx:HTTP Request: GET https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA "HTTP/1.1 200 OK"
+INFO:root:Видео загружено: temp_video.mp4
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendVideo "HTTP/1.1 200 OK"
+INFO:root:Сообщение отправлено: Сочи
+\U0001f4cd Лоо (Горный воздух)
+Дешевле прайса на 1 млн
+Срочно
+И это не стройка с нуля. Это готовый дом, 2015 года.
+
+\u25aa\ufe0f Дом клубного типа 3 этажа
+\u25aa\ufe0f Обновление фасада и территории \U0001f468\U0001f3fd\u200d\U0001f527
+\u25aa\ufe0f Своя баня \U0001f9d6\u200d\u2640\ufe0f
+\u25aa\ufe0f 10 минут до моря \U0001f30a и жд \U0001f689станции Горный воздух.
+\u25aa\ufe0f 20 км до Сочи
+\u25aa\ufe0f Земля в собственности
+
+Озеленение, баня со своим спуском к небольшому руслу реки .
+
+Объект располагается на равнине, в 10 минутах пешей доступности от моря, где один из самых лучших пляжей и достойная инфраструктура.
+S-23 м
+2- эт
+Цена \U0001f5252.0 млн\U0001f525
+Только наличка
+
+89180006062
+Координатор Наталия
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA64753950>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9258d04954a2819f37d0ad891f268ece
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA64751D60>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9258d04954a2819f37d0ad891f268ece
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA64828D40>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9258d04954a2819f37d0ad891f268ece
+INFO:root:WebDriver закрыт.
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA648297F0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9258d04954a2819f37d0ad891f268ece/url
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA64828E00>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9258d04954a2819f37d0ad891f268ece/url
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA64828EC0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9258d04954a2819f37d0ad891f268ece/url
+ERROR:root:Неожиданная ошибка в основном цикле: HTTPConnectionPool(host='localhost', port=55465): Max retries exceeded with url: /session/9258d04954a2819f37d0ad891f268ece/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002CA647F0080>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+INFO:root:Все задачи завершены.
+INFO:root:Цикл событий остановлен.
+INFO:root:Начало процесса завершения работы...
+INFO:root:Цикл событий уже остановлен.
+INFO:root:Скрипт успешно завершен.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\Данила\.wdm\drivers\chromedriver\win64\128.0.6613.84\chromedriver-win32/chromedriver.exe] found in cache
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза: IMPERIAL RS
+INFO:root:Открываем страницу канала.
+INFO:root:Ожидание полной загрузки страницы...
+INFO:root:Найдено последнее сообщение.
+INFO:root:Обнаружено видео: https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA, Ширина: 100, Высота: 100
+INFO:root:Сообщение: Сочи
+\U0001f4cd Лоо (Горный воздух)
+Дешевле прайса на 1 млн
+Срочно
+И это не стройка с нуля. Это готовый дом, 2015 года.
+
+\u25aa\ufe0f Дом клубного типа 3 этажа
+\u25aa\ufe0f Обновление фасада и территории \U0001f468\U0001f3fd\u200d\U0001f527
+\u25aa\ufe0f Своя баня \U0001f9d6\u200d\u2640\ufe0f
+\u25aa\ufe0f 10 минут до моря \U0001f30a и жд \U0001f689станции Горный воздух.
+\u25aa\ufe0f 20 км до Сочи
+\u25aa\ufe0f Земля в собственности
+
+Озеленение, баня со своим спуском к небольшому руслу реки .
+
+Объект располагается на равнине, в 10 минутах пешей доступности от моря, где один из самых лучших пляжей и достойная инфраструктура.
+S-23 м
+2- эт
+Цена \U0001f5252.0 млн\U0001f525
+Только наличка
+
+89180006062
+Координатор Наталия
+INFO:root:Медиа URL: https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF396BA40>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9a3c430fb8310625b2219b0d9e434b11
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF365F020>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9a3c430fb8310625b2219b0d9e434b11
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF391B230>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9a3c430fb8310625b2219b0d9e434b11
+INFO:root:WebDriver закрыт.
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF3A663F0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9a3c430fb8310625b2219b0d9e434b11/url
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF3A665D0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9a3c430fb8310625b2219b0d9e434b11/url
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF3A667B0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/9a3c430fb8310625b2219b0d9e434b11/url
+ERROR:root:Неожиданная ошибка в основном цикле: HTTPConnectionPool(host='localhost', port=55583): Max retries exceeded with url: /session/9a3c430fb8310625b2219b0d9e434b11/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000027EF3A66990>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+INFO:root:Все задачи завершены.
+INFO:root:Цикл событий остановлен.
+INFO:root:Начало процесса завершения работы...
+INFO:root:Цикл событий уже остановлен.
+INFO:root:Скрипт успешно завершен.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\Данила\.wdm\drivers\chromedriver\win64\128.0.6613.84\chromedriver-win32/chromedriver.exe] found in cache
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза: IMPERIAL RS
+INFO:root:Открываем страницу канала.
+INFO:root:Ожидание полной загрузки страницы...
+INFO:root:Найдено последнее сообщение.
+INFO:root:Обнаружено видео: https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA, Ширина: 100, Высота: 100
+INFO:root:Сообщение: Сочи
+\U0001f4cd Лоо (Горный воздух)
+Дешевле прайса на 1 млн
+Срочно
+И это не стройка с нуля. Это готовый дом, 2015 года.
+
+\u25aa\ufe0f Дом клубного типа 3 этажа
+\u25aa\ufe0f Обновление фасада и территории \U0001f468\U0001f3fd\u200d\U0001f527
+\u25aa\ufe0f Своя баня \U0001f9d6\u200d\u2640\ufe0f
+\u25aa\ufe0f 10 минут до моря \U0001f30a и жд \U0001f689станции Горный воздух.
+\u25aa\ufe0f 20 км до Сочи
+\u25aa\ufe0f Земля в собственности
+
+Озеленение, баня со своим спуском к небольшому руслу реки .
+
+Объект располагается на равнине, в 10 минутах пешей доступности от моря, где один из самых лучших пляжей и достойная инфраструктура.
+S-23 м
+2- эт
+Цена \U0001f5252.0 млн\U0001f525
+Только наличка
+
+89180006062
+Координатор Наталия
+INFO:root:Медиа URL: https://cdn4.cdn-telegram.org/file/579c8ec89b.mp4?token=A0wEbSTa9cbUJDMKKFDz1cjSiQ0hDTSRDjrWsqqXKR8rH7OfedgnRYuEE5p_hGs-3suLUdOWJR49mqjPFBjc1GrFmKNc1L_VoE2RaWrG9jllaWKKybce695q7avGelbOYJj4MSjQrQZrHOwrfLXqedsiyItOqcouOqwePhJ6COlFReFwGBaMO6vsNXlt1L6ByzljIGhTUFLZTCwQMXaBRM6WJYDpKD_IoCYWWmBKO4-xfhnsg531IfuNCBYvzAz0unzJ8af3_f0680oTFKrharAG5MTvMTgSBAWRStKo0SpvbkPYD8ZgSnjAdIksBMJOneEPwY3x9tOu7kPPmSCGpA
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+INFO:root:Получен сигнал 2. Немедленное завершение.
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A60B680>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A108980>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A302E70>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+INFO:root:WebDriver закрыт.
+INFO:root:Начало процесса завершения работы...
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A74A480>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A74A750>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A74A960>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+INFO:root:WebDriver закрыт.
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Получен сигнал 2. Немедленное завершение.
+INFO:root:Начало процесса завершения работы...
+INFO:root:Начало процесса завершения работы...
+INFO:root:Начало процесса завершения работы...
+INFO:root:Начало процесса завершения работы...
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A78A810>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A78AA80>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A78ACF0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+INFO:root:WebDriver закрыт.
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.telegram.org/bot7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ/sendMessage "HTTP/1.1 200 OK"
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A7C0B30>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698/url
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A7C0D10>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698/url
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A7C0EF0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698/url
+ERROR:root:Неожиданная ошибка в основном цикле: HTTPConnectionPool(host='localhost', port=55795): Max retries exceeded with url: /session/515662323cc45a2c14132de513b50698/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A7C10D0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A78BA70>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A78B890>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A78BB00>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+INFO:root:WebDriver закрыт.
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A7893D0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A789670>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001C95A789910>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/515662323cc45a2c14132de513b50698
+INFO:root:WebDriver закрыт.
+INFO:root:Отправлена контрольная фраза при завершении работы: \U0001f44b
