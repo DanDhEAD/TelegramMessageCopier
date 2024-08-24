@@ -22,11 +22,6 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Timeout after 24 minutes
-      uses: actions/timeout@v1
-      with:
-        minutes: 24
-
     - name: Run telegram message copier
       run: |
         python telegram_message_copier.py
