@@ -25,10 +25,17 @@ jobs:
     - name: Run the script
       run: python telegram_message_copier.py
 
+    - name: Save last_message artifact
+      if: success()  # Сохраняем артефакт только если скрипт успешно завершился
+      uses: actions/upload-artifact@v2
+      with:
+        name: last_message
+        path: last_message.txt
+
     - name: Send end message on success
       if: success()
-      run: python -c "from telegram import Bot; bot = Bot(token='$TELEGRAM_BOT_TOKEN'); bot.send_message(chat_id='@ImperialSochiRS', text='👋 Workflow завершен успешно!')"
+      run: python -c "from telegram import Bot; bot = Bot(token='7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ'); bot.send_message(chat_id='@ImperialSochiRS', text='👋 Workflow завершен успешно!')"
 
     - name: Send end message on failure
       if: failure()
-      run: python -c "from telegram import Bot; bot = Bot(token='$TELEGRAM_BOT_TOKEN'); bot.send_message(chat_id='@ImperialSochiRS', text='❌ Workflow завершен с ошибками!')"
+      run: python -c "from telegram import Bot; bot = Bot(token='7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ'); bot.send_message(chat_id='@ImperialSochiRS', text='❌ Workflow завершен с ошибками!')"
