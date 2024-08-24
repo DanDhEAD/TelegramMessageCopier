@@ -17,8 +17,8 @@ import sys
 # Настройки
 config = {
     "chrome_driver_path": "C:\\Users\\Данила\\Desktop\\GPT\\2\\chrome driver\\chromedriver.exe",
-    "telegram_bot_token": "<your_bot_token>",  # Убедитесь, что заменили на ваш токен
-    "channel_id": "<your_chat_id>",  # Убедитесь, что заменили на ваш чат ID
+    "telegram_bot_token": "7213896068:AAGbXygK7S1Jv3fCwx6n7jGNaHDSH2SgxfQ",  # Замените на ваш токен
+    "channel_id": "@ImperialSochiRS",  # Замените на ваш чат ID
     "source_channel_url": "https://t.me/s/developer_sochi",
     "phone_replacement": "+79170467895",
     "name_replacement": "Координатор Наталия",
@@ -106,7 +106,7 @@ def get_latest_message():
 
     try:
         text = message_block.find_element(By.CSS_SELECTOR, ".tgme_widget_message_text").text
-        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{2}[\s\-\.]?\d{2}\b", config["phone_replacement"], text)
+        text = re.sub(r"\b(\+7|8)?[\s\-\.]?\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\д{2}[\s\-\.]?\д{2}\b", config["phone_replacement"], text)
         text = re.sub(config["name_pattern"], config["name_replacement"], text)
         
         media_url = None
@@ -128,7 +128,7 @@ def get_latest_message():
                 logging.warning(f"Не удалось найти медиа для сообщения: {e}")
 
         logging.info(f"Сообщение: {text}")
-        if (media_url):
+        if media_url:
             logging.info(f"Медиа URL: {media_url}")
         
         return text, media_url, media_type
